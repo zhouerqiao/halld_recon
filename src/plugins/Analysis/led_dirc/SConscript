@@ -1,0 +1,13 @@
+import sbms
+from subprocess import call
+
+Import('*')
+env = env.Clone()
+sbms.AddDANA(env)
+env.Replace(OPTIONAL_PLUGIN_LIBS = [''])
+sbms.plugin(env)
+
+
+
+
+
