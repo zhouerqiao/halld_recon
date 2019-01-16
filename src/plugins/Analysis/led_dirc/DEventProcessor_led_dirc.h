@@ -73,7 +73,7 @@ class DEventProcessor_led_dirc : public jana::JEventProcessor
 	TH2F *hTruthPmtHit_North, *hTruthPmtHit_South;
 	TH2F *hTruthPixelHit_North, *hTruthPixelHit_South;
 	TH2F *hPixelHit_North, *hPixelHit_South;
-	TH2F *hTruthPixelHitTime;
+	//TH2F *hTruthPixelHitTime;
 
 	const int nPMTs   = 108;
 	const int nPixels = 64;
@@ -81,8 +81,8 @@ class DEventProcessor_led_dirc : public jana::JEventProcessor
 	TH1F *hPixelHitTime_t_North[108][64];
 	TH1F *hPixelHitTime_t_South[108][64];
 
-	TH1F *hPixelHitTime_t_fixed_North[108][64];
-	TH1F *hPixelHitTime_t_fixed_South[108][64];
+	//TH1F *hPixelHitTime_t_fixed_North[108][64];
+	//TH1F *hPixelHitTime_t_fixed_South[108][64];
 
 	TH1F *hSmearAmount_HitTime;
 	TH1F *hPixelHitTime_HitTimeSmeared_North[108][64];

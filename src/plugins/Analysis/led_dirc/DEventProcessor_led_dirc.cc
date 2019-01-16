@@ -34,7 +34,7 @@ jerror_t DEventProcessor_led_dirc::init(void)
     gDirectory->Cd("/");
 
   int nChannels = 108*64;
-  hTruthPixelHitTime = new TH2F("hTruthPixelHitTime", "; Pixel Channel # ; #Delta t (ns)", nChannels, 0, nChannels, 200, -100, 100);
+  //hTruthPixelHitTime = new TH2F("hTruthPixelHitTime", "; Pixel Channel # ; #Delta t (ns)", nChannels, 0, nChannels, 200, -100, 100);
 
   hTruthBarHitXY = new TH2F("hTruthBarHitXY", "; Bar Hit X (cm); Bar Hit Y (cm)", 200, -100, 100, 200, -100, 100);
   hTruthBarHitBar = new TH1F("hTruthBarHitBar", "; Bar #", 48, 0.5, 47.5);
@@ -73,8 +73,8 @@ jerror_t DEventProcessor_led_dirc::init(void)
 
 			hPixelHitTime_t_South[iPmt][iPixel] = new TH1F(Form("hTimePmtHit_t_South_PMT%d_Pixel%d_%s",iPmt,iPixel,pixel_xy.c_str()),
 								Form("hTimePmtHit_t_South_PMT%d_Pixel%d; hit time (ns);",iPmt,iPixel),NbinsTime,MinTime,MaxTime);
-			hPixelHitTime_t_fixed_South[iPmt][iPixel] = new TH1F(Form("hTimePmtHit_t_fixed_South_PMT%d_Pixel%d_%s",iPmt,iPixel,pixel_xy.c_str()),
-								Form("hTimePmtHit_t_fixed_South_PMT%d_Pixel%d; hit time (ns);",iPmt,iPixel),NbinsTime,MinTime,MaxTime);
+			//hPixelHitTime_t_fixed_South[iPmt][iPixel] = new TH1F(Form("hTimePmtHit_t_fixed_South_PMT%d_Pixel%d_%s",iPmt,iPixel,pixel_xy.c_str()),
+			//					Form("hTimePmtHit_t_fixed_South_PMT%d_Pixel%d; hit time (ns);",iPmt,iPixel),NbinsTime,MinTime,MaxTime);
 			hPixelHitTime_HitTimeSmeared_South[iPmt][iPixel] = new TH1F(Form("hTimePmtHit_HitTimeSmeared_South_PMT%d_Pixel%d_%s",iPmt,iPixel,pixel_xy.c_str()),
 								Form("hTimePmtHit_HitTimeSmeared_South_PMT%d_Pixel%d; hit time (ns);",iPmt,iPixel),NbinsTime,MinTime,MaxTime);
 			hPixelHitTime_LEDSmeared_South[iPmt][iPixel] = new TH1F(Form("hTimePmtHit_LEDSmeared_South_PMT%d_Pixel%d_%s",iPmt,iPixel,pixel_xy.c_str()),
@@ -95,8 +95,8 @@ jerror_t DEventProcessor_led_dirc::init(void)
 
                         hPixelHitTime_t_North[iPmt][iPixel] = new TH1F(Form("hTimePmtHit_t_North_PMT%d_Pixel%d_%s",iPmt,iPixel,pixel_xy.c_str()),
                                                                 Form("hTimePmtHit_t_North_PMT%d_Pixel%d; hit time (ns);",iPmt,iPixel),NbinsTime,MinTime,MaxTime);
-                        hPixelHitTime_t_fixed_North[iPmt][iPixel] = new TH1F(Form("hTimePmtHit_t_fixed_North_PMT%d_Pixel%d_%s",iPmt,iPixel,pixel_xy.c_str()),
-                                                                Form("hTimePmtHit_t_fixed_North_PMT%d_Pixel%d; hit time (ns);",iPmt,iPixel),NbinsTime,MinTime,MaxTime);
+                        //hPixelHitTime_t_fixed_North[iPmt][iPixel] = new TH1F(Form("hTimePmtHit_t_fixed_North_PMT%d_Pixel%d_%s",iPmt,iPixel,pixel_xy.c_str()),
+                        //                                        Form("hTimePmtHit_t_fixed_North_PMT%d_Pixel%d; hit time (ns);",iPmt,iPixel),NbinsTime,MinTime,MaxTime);
                         hPixelHitTime_HitTimeSmeared_North[iPmt][iPixel] = new TH1F(Form("hTimePmtHit_HitTimeSmeared_North_PMT%d_Pixel%d_%s",iPmt,iPixel,pixel_xy.c_str()),
                                                                 Form("hTimePmtHit_HitTimeSmeared_North_PMT%d_Pixel%d; hit time (ns);",iPmt,iPixel),NbinsTime,MinTime,MaxTime);
                         hPixelHitTime_LEDSmeared_North[iPmt][iPixel] = new TH1F(Form("hTimePmtHit_LEDSmeared_North_PMT%d_Pixel%d_%s",iPmt,iPixel,pixel_xy.c_str()),
@@ -168,7 +168,7 @@ jerror_t DEventProcessor_led_dirc::evnt(jana::JEventLoop* loop, uint64_t locEven
      double y = dircPmtHits[h]->y;
      double z = dircPmtHits[h]->z;
      double t = dircPmtHits[h]->t;
-     double t_fixed = dircPmtHits[h]->t_fixed;
+     //double t_fixed = dircPmtHits[h]->t_fixed;
 
      // get PMT labels
      int pmt_id     = dDIRCGeometry->GetPmtID(ch);
@@ -186,7 +186,7 @@ jerror_t DEventProcessor_led_dirc::evnt(jana::JEventLoop* loop, uint64_t locEven
 			      mcthrowns[0]->position().Z());
 
      japp->RootWriteLock(); //ACQUIRE ROOT LOCK
-     hTruthPixelHitTime->Fill(ch, t-t_fixed);
+     //hTruthPixelHitTime->Fill(ch, t-t_fixed);
 
      double t_HitTimeSmearAmount = rand3.Gaus(0.,res_PmtTime);
 
@@ -264,7 +264,7 @@ jerror_t DEventProcessor_led_dirc::evnt(jana::JEventLoop* loop, uint64_t locEven
 	hTruthPmtHit_South->Fill(pmt_column, pmt_row);
 	hTruthPixelHit_South->Fill(pixel_x, pixel_y);
 	hPixelHitTime_t_South[pmt_id][pixel_id]->Fill(t);
-	hPixelHitTime_t_fixed_South[pmt_id][pixel_id]->Fill(t_fixed);
+	//hPixelHitTime_t_fixed_South[pmt_id][pixel_id]->Fill(t_fixed);
 	hPixelHitTime_HitTimeSmeared_South[pmt_id][pixel_id]->Fill(t_HitTimeSmeared);
 	hPixelHitTime_LEDSmeared_South[pmt_id][pixel_id]->Fill(t_LEDSmeared);
 	hPixelHitTime_FinalSmeared_South[pmt_id][pixel_id]->Fill(t_FinalSmeared);
@@ -274,7 +274,7 @@ jerror_t DEventProcessor_led_dirc::evnt(jana::JEventLoop* loop, uint64_t locEven
 	hTruthPmtHit_North->Fill(pmt_column, pmt_row);
 	hTruthPixelHit_North->Fill(pixel_x, pixel_y);
 	hPixelHitTime_t_North[pmt_id][pixel_id]->Fill(t);
-	hPixelHitTime_t_fixed_North[pmt_id][pixel_id]->Fill(t);
+	//hPixelHitTime_t_fixed_North[pmt_id][pixel_id]->Fill(t);
 	hPixelHitTime_HitTimeSmeared_North[pmt_id][pixel_id]->Fill(t_HitTimeSmeared);
 	hPixelHitTime_LEDSmeared_North[pmt_id][pixel_id]->Fill(t_LEDSmeared);
 	hPixelHitTime_FinalSmeared_North[pmt_id][pixel_id]->Fill(t_FinalSmeared);
